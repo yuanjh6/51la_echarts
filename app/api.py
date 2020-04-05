@@ -6,8 +6,8 @@ from flask import request
 
 app_api = Blueprint("api", __name__, static_folder="static", template_folder="templates")
 LA51FLOWDAYURL = 'https://web.51.la/report/flow/day?comId=%s'
-# 　仅允许如下comId访问，避免滥用
-comIdList = list(['20718523'])
+# 　仅允许如下comId访问，避免滥用,如果为空则不限制comId
+comIdList = list()
 
 
 def transDf2MultiChartsMap(dataDf, extMap={}, typeMap={}, yAxisIndexMap={}):
@@ -37,7 +37,7 @@ def transDf2MultiChartsMap(dataDf, extMap={}, typeMap={}, yAxisIndexMap={}):
 def la51FlowDay():
     comId = request.args.get('comId')
     startDate = request.args.get('startDate', '2020-01-01')
-    if not comId or comId not in comIdList:
+    if comIdList and (not comId or comId not in comIdList):
         return "{}"
     allMaps = dict()
     allMaps['comId'] = comId
@@ -48,7 +48,7 @@ def la51FlowDay():
 @app_api.route('/echarts/la51FlowDay', methods=['get'])
 def echarts_la51FlowDay():
     comId = request.args.get('comId')
-    if not comId or comId not in comIdList:
+    if comIdList and (not comId or comId not in comIdList):
         return "{}"
     htmlUrl = LA51FLOWDAYURL % comId
     htmlPdList = pd.read_html(htmlUrl)
