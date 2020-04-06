@@ -52,6 +52,6 @@ def echarts_la51FlowDay():
         return "{}"
     htmlUrl = LA51FLOWDAYURL % comId
     htmlPdList = pd.read_html(htmlUrl)
-    recent30Df = htmlPdList[0]
+    recent30Df = htmlPdList[0][:-1]
     recent30Df = recent30Df[['时间', '页面浏览量(PV)', '访客数(UV)']].set_index(['时间']).sort_index()
     return transDf2MultiChartsMap(recent30Df)
