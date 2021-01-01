@@ -1,0 +1,6 @@
+# env 51la_echarts python=3.5
+flask
+pandas
+lxml
+html5lib
+bs4

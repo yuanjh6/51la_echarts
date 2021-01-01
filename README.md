@@ -6,6 +6,12 @@
 语言:python:3.6  
 web:flask框架  
 
+环境搭建  
+参考requirments的配置建立conda虚拟环境51la_echarts  
+pip install -r requirments.txt  
+conda activate 51la_echarts  
+
+
 启动  
 ```
 git clone https://github.com/yuanjh6/51la_echarts.git
